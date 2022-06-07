@@ -1,30 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+// https://random-word-api.herokuapp.com/word?length=5
+
 function App() {
-  let [curentWord, setCurentWord] = useState("aaaaa");
+	let [curentWord, setCurentWord] = useState("aaaaa");
 
+	useEffect(() => {
+		fetch(process.env.REACT_APP_WORD_API_URL)
+		.then(r => r.text())
+		.then(r => setCurentWord(r))
+	}, []);
 
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className="App">
+			{curentWord}
+		</div>
+	);
 }
 
 export default App;
