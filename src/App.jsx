@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import { useState, useEffect } from "react";
+import "./App.css";
 
 function App() {
-	let [curentWord, setCurentWord] = useState("aaaaa");
+	let [curentWord, setCurentWord] = useState(".....");
 
-	let [input, setInput] = useState([]);
+	let [rows, setRows] = useState([]);
+
+	let [input, setInput] = useState("");
 
 	useEffect(() => {
 		fetch(process.env.REACT_APP_WORD_API_URL)
@@ -17,7 +19,7 @@ function App() {
 			{curentWord}
 			<div className="bg-slate-600 h-20 w-20"></div>
 			<div className="flex justify-center align-middle">
-				<div className="">
+				<div className="border border-slate-600 rounded">
 					<div className="flex flex-row">
 						<div className="case">A</div>
 						<div className="case">A</div>
@@ -34,7 +36,9 @@ function App() {
 					</div>
 				</div>
 			</div>
-			<input type="text" name="input" id="input" className="bg-slate-200"/>
+			{input}
+			<input type="text" name="input" id="input" className="bg-slate-200" onChange={e => setInput(e.target.value)}/>
+			<button className="bg-slate-200">Enter</button>
 		</div>
 	);
 }
