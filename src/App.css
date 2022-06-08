@@ -13,3 +13,7 @@
 .case-g {
   @apply bg-green-600;
 }
+
+.case-y {
+  @apply bg-yellow-600;
+}

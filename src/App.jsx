@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Box from "./components/Box";
 import "./App.css";
 
 function App() {
@@ -21,11 +22,14 @@ function App() {
 			<div className="flex justify-center align-middle">
 				<div className="border border-slate-600 rounded">
 					<div className="flex flex-row">
-						<div className="case">A</div>
-						<div className="case">A</div>
-						<div className="case">A</div>
-						<div className="case">A</div>
-						<div className="case">A</div>
+						{() => {
+							let out = [];
+							Array.from(input).forEach(function(char) {
+								console.log(char);
+								out.push(<Box letter={char} />);
+							});
+							return out
+						}}
 					</div>
 					<div className="flex flex-row">
 						<div className="case">B</div>
@@ -37,8 +41,14 @@ function App() {
 				</div>
 			</div>
 			{input}
-			<input type="text" name="input" id="input" className="bg-slate-200" onChange={e => setInput(e.target.value)}/>
-			<button className="bg-slate-200">Enter</button>
+			<input type="text" name="input" id="input" className="bg-slate-200 rounded border" onChange={e => {
+				setInput(e.target.value)
+			}}/>
+			<button className="bg-slate-200 rounded border" onClick={() => {
+				if (input.length === 5) {
+					rows.push(input)
+				}
+			}}>Enter</button>
 		</div>
 	);
 }
