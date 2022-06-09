@@ -59,7 +59,7 @@ function App() {
 					</div>
 					<div className="flex flex-row">
 						<input type="text" name="input" id="input" className="bg-slate-200 rounded border m-1 h-10 border-slate-600 w-4/5" value={input} onChange={e => {
-							if (e.target.value.length <= 5) {
+							if (e.target.value.length <= 5 && (/^[a-zA-Z]+$/.test(e.target.value) || e.target.value === "")) {
 								setInput(e.target.value)
 							}
 						}}/>
