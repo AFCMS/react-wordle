@@ -22,14 +22,28 @@ function App() {
 			<div className="flex justify-center align-middle">
 				<div className="border border-slate-600 rounded">
 					<div className="flex flex-row">
-						{() => {
+						{(() => {
 							let out = [];
-							Array.from(input).forEach(function(char) {
-								console.log(char);
-								out.push(<Box letter={char} />);
-							});
+							for (let i = 0; i < 5; i++) {
+								if (input[i] === undefined) {
+									let char = "";
+									out.push(undefined)
+								} else {
+									let char = input[i].toUpperCase()
+
+									if (char === curentWord[i].toUpperCase()) {
+										out.push(<Box letter={char} key={i}/>)
+									} else {
+										out.push(<Box letter={char} key={i}/>)
+									}
+								}
+							}
+							//Array.from(input).forEach(function(char) {
+							//	console.log(char);
+							//	out.push(char.toUpperCase());
+							//});
 							return out
-						}}
+						})()}
 					</div>
 					<div className="flex flex-row">
 						<div className="case">B</div>
@@ -46,7 +60,12 @@ function App() {
 			}}/>
 			<button className="bg-slate-200 rounded border" onClick={() => {
 				if (input.length === 5) {
-					rows.push(input)
+					//rows.push(input)
+					let r = rows
+					r.push(input)
+					setRows(r)
+
+					console.log(JSON.stringify(rows))
 				}
 			}}>Enter</button>
 		</div>
