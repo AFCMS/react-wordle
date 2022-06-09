@@ -49,11 +49,13 @@ function App() {
 						})()}
 					</div>
 					<div className="flex flex-row">
-						<div className="case">B</div>
-						<div className="case">B</div>
-						<div className="case">B</div>
-						<div className="case">B</div>
-						<div className="case">B</div>
+						{(()=>{
+							let out = [];
+							for (let i = 0; i < 5; i++) {
+								out.push(<Box letter="B" key={i}/>)
+							}
+							return out
+						})()}
 					</div>
 					<div className="flex flex-row">
 						<input type="text" name="input" id="input" className="bg-slate-200 rounded border m-1 h-10 border-slate-600 w-4/5" value={input} onChange={e => {
