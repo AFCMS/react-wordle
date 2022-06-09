@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 .case {
-  @apply m-1 bg-slate-200 rounded border-slate-600 border h-16 w-16 flex flex-row items-center justify-center text-3xl;
+  @apply m-1 rounded border-slate-600 border h-16 w-16 flex flex-row items-center justify-center text-3xl;
+}
+
+.case-b {
+  @apply bg-slate-200;
 }
 
 .case-e {

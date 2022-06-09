@@ -31,8 +31,11 @@ function App() {
 								} else {
 									let char = input[i].toUpperCase()
 
-									if (char === curentWord[i].toUpperCase()) {
-										out.push(<Box letter={char} key={i}/>)
+									console.log(char)
+
+									if (curentWord[i] !== undefined && char === curentWord[i].toUpperCase()) {
+										out.push(<Box letter={char} key={i} type={right}/>)
+										console.log(char === curentWord[i].toUpperCase())
 									} else {
 										out.push(<Box letter={char} key={i}/>)
 									}
@@ -52,22 +55,24 @@ function App() {
 						<div className="case">B</div>
 						<div className="case">B</div>
 					</div>
+					<div className="flex flex-row">
+						<input type="text" name="input" id="input" className="bg-slate-200 rounded border m-1 h-10 border-slate-600 w-4/5" value={input} onChange={e => {
+							if (e.target.value.length <= 5) {
+								setInput(e.target.value)
+							}
+						}}/>
+						<button className="bg-slate-200 rounded border m-1 h-10 border-slate-600 w-1/5" onClick={() => {
+							if (input.length === 5) {
+								let r = rows
+								r.push(input)
+								setRows(r)
+
+								console.log(JSON.stringify(rows))
+							}
+						}}>Enter</button>
+					</div>
 				</div>
 			</div>
-			{input}
-			<input type="text" name="input" id="input" className="bg-slate-200 rounded border" onChange={e => {
-				setInput(e.target.value)
-			}}/>
-			<button className="bg-slate-200 rounded border" onClick={() => {
-				if (input.length === 5) {
-					//rows.push(input)
-					let r = rows
-					r.push(input)
-					setRows(r)
-
-					console.log(JSON.stringify(rows))
-				}
-			}}>Enter</button>
 		</div>
 	);
 }
