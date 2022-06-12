@@ -27,14 +27,15 @@ function App() {
 							for (let i = 0; i < 5; i++) {
 								if (input[i] === undefined) {
 									let char = "";
-									out.push(undefined)
+									out.push(<Box letter="" key={i}/>)
 								} else {
 									let char = input[i].toUpperCase()
 
 									console.log(char)
+									console.log(curentWord[i].toUpperCase())
 
 									if (curentWord[i] !== undefined && char === curentWord[i].toUpperCase()) {
-										out.push(<Box letter={char} key={i} type={right}/>)
+										out.push(<Box letter={char} key={i} type="right"/>)
 										console.log(char === curentWord[i].toUpperCase())
 									} else {
 										out.push(<Box letter={char} key={i}/>)
