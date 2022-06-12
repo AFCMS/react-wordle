@@ -96,7 +96,7 @@ function App() {
 							}}
 						/>
 						<button
-							className="m-1 h-10 w-1/5 rounded border border-slate-600 bg-slate-200 disabled:bg-red-400"
+							className="m-1 h-10 w-1/5 rounded border border-slate-600 bg-slate-200 hover:bg-slate-400 disabled:bg-slate-300"
 							onClick={() => {
 								if (!win && input.length === 5) {
 									let r = rows;
