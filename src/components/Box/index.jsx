@@ -1,3 +1,5 @@
+import "./Box.css";
+
 function Box(props) {
 	let case_type = "";
 	if (props.t === "edit") {

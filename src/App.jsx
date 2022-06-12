@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Box from "./components/Box";
-import "./App.css";
 
 function build_row(curent_word, row, id) {
 	let out = [];
