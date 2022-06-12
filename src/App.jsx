@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import Box from "./components/Box";
 import "./App.css";
-let t = "";
-
-t.match("");
 
 function build_row(curent_word, row, id) {
 	let out = [];
