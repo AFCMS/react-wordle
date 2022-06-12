@@ -69,7 +69,9 @@ function App() {
 		<div className="App">
 			<div className="m-2 flex justify-center align-middle">
 				<div className="rounded border border-slate-600">
-					<h1 className="text-center text-xl">React Wordle</h1>
+					<h1 className="text-center text-xl">
+						React Wordle {win ? "GG" : ""}
+					</h1>
 					{(() => {
 						let lines = [];
 						for (let r = 0; r < 5; r++) {
@@ -102,6 +104,7 @@ function App() {
 									setRows(r);
 									if (input === curentWord) {
 										console.log("Gagné");
+										setWin(true);
 									}
 									setInput("");
 
