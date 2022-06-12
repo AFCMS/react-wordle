@@ -98,7 +98,7 @@ function App() {
 						<button
 							className="m-1 h-10 w-1/5 rounded border border-slate-600 bg-slate-200 disabled:bg-red-400"
 							onClick={() => {
-								if (input.length === 5) {
+								if (!win && input.length === 5) {
 									let r = rows;
 									r.push(input);
 									setRows(r);
