@@ -69,7 +69,7 @@ function App() {
 		<div className="App">
 			<div className="m-2 flex justify-center align-middle">
 				<div className="rounded border border-slate-600">
-					<h1 className="text-center text-xl">
+					<h1 className="text-center text-xl font-bold">
 						React Wordle {win ? "GG" : ""}
 					</h1>
 					{(() => {
