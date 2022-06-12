@@ -9,7 +9,7 @@ function Box(props) {
 	} else if (props.t === "wplaced") {
 		case_type = "case-y";
 	}
-	//console.log(case_type);
+
 	return <div className={"case " + case_type}>{props.letter}</div>;
 }
 

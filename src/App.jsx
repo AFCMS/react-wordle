@@ -4,7 +4,6 @@ import "./App.css";
 
 function build_row(curent_word, row, id) {
 	let out = [];
-	console.log(row);
 
 	if (row === undefined) {
 		for (let i = 0; i < 5; i++) {
@@ -19,9 +18,7 @@ function build_row(curent_word, row, id) {
 				let char_c = curent_word[i].toUpperCase();
 
 				if (char === char_c) {
-					//console.log(curent_word[i].toUpperCase());
 					out.push(<Box letter={char} key={i} t={"right"} />);
-					//console.log(char === curent_word[i].toUpperCase());
 				} else {
 					if (curent_word.match(row[i])) {
 						out.push(<Box letter={char} key={i} t={"wplaced"} />);
@@ -108,7 +105,7 @@ function App() {
 									}
 									setInput("");
 
-									console.log(JSON.stringify(rows));
+									//console.log(JSON.stringify(rows));
 								}
 							}}
 						>
