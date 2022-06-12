@@ -1,6 +1,60 @@
 import { useState, useEffect } from "react";
 import Box from "./components/Box";
 import "./App.css";
+let t = "";
+
+t.match("");
+
+function build_row(curent_word, row, id) {
+	let out = [];
+	console.log(row);
+
+	if (row === undefined) {
+		for (let i = 0; i < 5; i++) {
+			out.push(<Box letter="" key={i} />);
+		}
+	} else {
+		for (let i = 0; i < 5; i++) {
+			if (row[i] === undefined) {
+				out.push(<Box letter="" key={i} />);
+			} else {
+				let char = row[i].toUpperCase();
+				let char_c = curent_word[i].toUpperCase();
+
+				if (char === char_c) {
+					//console.log(curent_word[i].toUpperCase());
+					out.push(<Box letter={char} key={i} t={"right"} />);
+					//console.log(char === curent_word[i].toUpperCase());
+				} else {
+					if (curent_word.match(row[i])) {
+						out.push(<Box letter={char} key={i} t={"wplaced"} />);
+					} else {
+						out.push(<Box letter={char} key={i} t={"wrong"} />);
+					}
+				}
+			}
+		}
+	}
+	return (
+		<div className="flex flex-row" key={id}>
+			{out}
+		</div>
+	);
+}
+
+/*
+function build_row_input(curent_word, input) {
+	let out = [];
+	for (let i = 0; i < 5; i++) {
+		if (input[i] === undefined) {
+			out.push(<Box letter="" key={i} t={"edit"} />);
+		} else {
+			let char = input[i].toUpperCase();
+			out.push(<Box letter={char} key={i} t={"edit"} />);
+		}
+	}
+	return <div className="flex flex-row">{out}</div>;
+}*/
 
 function App() {
 	let [curentWord, setCurentWord] = useState("allay");
@@ -8,6 +62,8 @@ function App() {
 	let [rows, setRows] = useState([]);
 
 	let [input, setInput] = useState("");
+
+	let [win, setWin] = useState(false);
 
 	useEffect(() => {
 		fetch(process.env.REACT_APP_WORD_API_URL)
@@ -17,48 +73,16 @@ function App() {
 
 	return (
 		<div className="App">
-			{curentWord}
-			<div className="h-20 w-20 bg-slate-600"></div>
-			<div className="flex justify-center align-middle">
+			<div className="m-2 flex justify-center align-middle">
 				<div className="rounded border border-slate-600">
-					<div className="flex flex-row">
-						{(() => {
-							let out = [];
-							for (let i = 0; i < 5; i++) {
-								if (input[i] === undefined) {
-									let char = "";
-									out.push(<Box letter="" key={i} />);
-								} else {
-									let char = input[i].toUpperCase();
-
-									if (
-										curentWord[i] !== undefined &&
-										char === curentWord[i].toUpperCase()
-									) {
-										console.log(curentWord[i].toUpperCase());
-										out.push(<Box letter={char} key={i} t={"right"} />);
-										console.log(char === curentWord[i].toUpperCase());
-									} else {
-										out.push(<Box letter={char} key={i} t={"edit"} />);
-									}
-								}
-							}
-							//Array.from(input).forEach(function(char) {
-							//	console.log(char);
-							//	out.push(char.toUpperCase());
-							//});
-							return out;
-						})()}
-					</div>
-					<div className="flex flex-row">
-						{(() => {
-							let out = [];
-							for (let i = 0; i < 5; i++) {
-								out.push(<Box letter="B" key={i} />);
-							}
-							return out;
-						})()}
-					</div>
+					<h1 className="text-center text-xl">React Wordle</h1>
+					{(() => {
+						let lines = [];
+						for (let r = 0; r < 5; r++) {
+							lines.push(build_row(curentWord, rows[r], r));
+						}
+						return lines;
+					})()}
 					<div className="flex flex-row">
 						<input
 							type="text"
@@ -76,12 +100,16 @@ function App() {
 							}}
 						/>
 						<button
-							className="m-1 h-10 w-1/5 rounded border border-slate-600 bg-slate-200"
+							className="m-1 h-10 w-1/5 rounded border border-slate-600 bg-slate-200 disabled:bg-red-400"
 							onClick={() => {
 								if (input.length === 5) {
 									let r = rows;
 									r.push(input);
 									setRows(r);
+									if (input === curentWord) {
+										console.log("Gagné");
+									}
+									setInput("");
 
 									console.log(JSON.stringify(rows));
 								}
