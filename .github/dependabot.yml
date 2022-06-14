@@ -7,3 +7,10 @@ updates:
       interval: "daily"
     assignees:
       - "AFCMS"
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: daily
+    assignees:
+      - "AFCMS"
+
