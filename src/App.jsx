@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Box from "./components/Box";
+import words from "./words.json";
 
 function build_row(curent_word, row, id) {
 	let out = [];
@@ -29,7 +30,7 @@ function build_row(curent_word, row, id) {
 		}
 	}
 	return (
-		<div className="flex flex-row" key={id}>
+		<div className="m-1 flex flex-row" key={id}>
 			{out}
 		</div>
 	);
@@ -50,7 +51,7 @@ function build_row_input(curent_word, input) {
 }*/
 
 function App() {
-	let [curentWord, setCurentWord] = useState("allay");
+	let [curentWord, setCurentWord] = useState(words.at(1));
 
 	let [rows, setRows] = useState([]);
 
@@ -58,17 +59,19 @@ function App() {
 
 	let [win, setWin] = useState(false);
 
-	useEffect(() => {
+	/*useEffect(() => {
 		fetch(process.env.REACT_APP_WORD_API_URL)
 			.then((r) => r.json())
 			.then((r) => setCurentWord(r));
-	}, []);
+	}, []);*/
+
+	//setCurentWord(words.at(1));
 
 	return (
 		<div className="App">
-			<div className="m-2 flex justify-center align-middle">
-				<div className="rounded border border-slate-600">
-					<h1 className="text-center text-xl font-bold">
+			<div className="m-2 flex justify-center">
+				<div className="w-full rounded border border-slate-600 md:w-1/4">
+					<h1 className="mt-1 text-center text-xl font-bold text-black transition-colors dark:text-white">
 						React Wordle {win ? "GG" : ""}
 					</h1>
 					{(() => {
@@ -78,24 +81,27 @@ function App() {
 						}
 						return lines;
 					})()}
-					<div className="flex flex-row">
+					<div className="m-1 flex flex-row">
 						<input
 							type="text"
 							name="input"
 							id="input"
-							className="m-1 h-10 w-4/5 rounded border border-slate-600 bg-slate-200"
+							className="m-1 h-10 w-4/5 rounded border border-slate-600 bg-slate-200 text-black transition-colors dark:border-0 dark:bg-gray-800 dark:text-white"
 							value={input}
+							disabled={win}
 							onChange={(e) => {
 								if (
 									e.target.value.length <= 5 &&
-									(/^[a-zA-Z]+$/.test(e.target.value) || e.target.value === "")
+									(/^[a-zA-Z]+$/.test(e.target.value) ||
+										e.target.value === "") &&
+									win == false
 								) {
 									setInput(e.target.value);
 								}
 							}}
 						/>
 						<button
-							className="m-1 h-10 w-1/5 rounded border border-slate-600 bg-slate-200 hover:bg-slate-400 disabled:bg-slate-300"
+							className="m-1 h-10 w-1/5 rounded border border-slate-600 bg-slate-200 text-black transition-colors hover:bg-slate-400 disabled:bg-slate-300 dark:border-0 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-600"
 							onClick={() => {
 								if (!win && input.length === 5) {
 									let r = rows;
