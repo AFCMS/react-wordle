@@ -29,11 +29,7 @@ function build_row(curent_word, row, id) {
 			}
 		}
 	}
-	return (
-		<div className="m-1 flex flex-row" key={id}>
-			{out}
-		</div>
-	);
+	return <>{out}</>;
 }
 
 /*
@@ -69,24 +65,24 @@ function App() {
 
 	return (
 		<div className="App">
-			<div className="m-2 flex justify-center">
-				<div className="w-full rounded border border-slate-600 md:w-1/4">
+			<div className="">
+				<div className="mx-auto max-w-screen-md rounded border border-slate-600 p-4">
 					<h1 className="mt-1 text-center text-xl font-bold text-black transition-colors dark:text-white">
 						React Wordle {win ? "GG" : ""}
 					</h1>
-					{(() => {
-						let lines = [];
-						for (let r = 0; r < 5; r++) {
-							lines.push(build_row(curentWord, rows[r], r));
-						}
-						return lines;
-					})()}
-					<div className="m-1 flex flex-row">
+					<div className="grid grid-cols-5 grid-rows-6 gap-4">
+						{(() => {
+							let lines = [];
+							for (let r = 0; r < 5; r++) {
+								lines.push(build_row(curentWord, rows[r], r));
+							}
+							return lines;
+						})()}
 						<input
 							type="text"
 							name="input"
 							id="input"
-							className="m-1 h-10 w-4/5 rounded border border-slate-600 bg-slate-200 text-black transition-colors dark:border-0 dark:bg-gray-800 dark:text-white"
+							className="col-span-4 m-1 h-10 w-4/5 rounded border border-slate-600 bg-slate-200 text-black transition-colors dark:border-0 dark:bg-gray-800 dark:text-white"
 							value={input}
 							disabled={win}
 							onChange={(e) => {
