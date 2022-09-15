@@ -10,7 +10,7 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "stylelint": "^14.11.0",
-    "web-vitals": "^3.0.1"
+    "web-vitals": "^3.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
