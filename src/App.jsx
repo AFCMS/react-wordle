@@ -7,12 +7,12 @@ function build_row(curent_word, row, id) {
 
 	if (row === undefined) {
 		for (let i = 0; i < 5; i++) {
-			out.push(<Box letter="" key={i} />);
+			out.push(<Box letter=" " key={i} />);
 		}
 	} else {
 		for (let i = 0; i < 5; i++) {
 			if (row[i] === undefined) {
-				out.push(<Box letter="" key={i} />);
+				out.push(<Box letter=" " key={i} />);
 			} else {
 				let char = row[i].toUpperCase();
 				let char_c = curent_word[i].toUpperCase();
@@ -65,10 +65,10 @@ function App() {
 
 	return (
 		<div className="App">
-			<div className="">
-				<div className="mx-auto max-w-screen-md rounded border border-slate-600 p-4">
-					<h1 className="mt-1 text-center text-xl font-bold text-black transition-colors dark:text-white">
-						React Wordle {win ? "GG" : ""}
+			<div className="flex items-center justify-center p-6">
+				<div className="flex w-max flex-col rounded border border-slate-600 p-4 shadow shadow-slate-600">
+					<h1 className="mb-3 text-center text-xl font-bold text-black transition-colors dark:text-white">
+						React Wordle{win ? " GG" : ""}
 					</h1>
 					<div className="grid grid-cols-5 grid-rows-6 gap-4">
 						{(() => {
@@ -82,7 +82,7 @@ function App() {
 							type="text"
 							name="input"
 							id="input"
-							className="col-span-4 m-1 h-10 w-4/5 rounded border border-slate-600 bg-slate-200 text-black transition-colors dark:border-0 dark:bg-gray-800 dark:text-white"
+							className="col-span-4 h-16 appearance-none rounded border border-slate-600 bg-slate-200 pl-4 text-left text-black transition-colors transition-colors focus:border-blue-600 focus:outline-none dark:border-0 dark:bg-gray-800 dark:text-white"
 							value={input}
 							disabled={win}
 							onChange={(e) => {
@@ -95,9 +95,25 @@ function App() {
 									setInput(e.target.value);
 								}
 							}}
+							onKeyDown={(e) => {
+								console.log(e.key);
+								if (e.key && e.key == "Enter") {
+									if (!win && input.length === 5) {
+										let r = rows;
+										r.push(input);
+										setRows(r);
+										if (input === curentWord) {
+											console.log("Gagné");
+											setWin(true);
+										}
+										setInput("");
+									}
+								}
+							}}
+							autofocus
 						/>
 						<button
-							className="m-1 h-10 w-1/5 rounded border border-slate-600 bg-slate-200 text-black transition-colors hover:bg-slate-400 disabled:bg-slate-300 dark:border-0 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-600"
+							className="h-16 w-16 rounded border border-slate-600 bg-slate-200 text-black transition-colors hover:bg-slate-400 disabled:bg-slate-300 dark:border-0 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-600"
 							onClick={() => {
 								if (!win && input.length === 5) {
 									let r = rows;
@@ -108,8 +124,6 @@ function App() {
 										setWin(true);
 									}
 									setInput("");
-
-									//console.log(JSON.stringify(rows));
 								}
 							}}
 						>
