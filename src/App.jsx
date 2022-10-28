@@ -32,20 +32,6 @@ function build_row(curent_word, row, id) {
 	return <>{out}</>;
 }
 
-/*
-function build_row_input(curent_word, input) {
-	let out = [];
-	for (let i = 0; i < 5; i++) {
-		if (input[i] === undefined) {
-			out.push(<Box letter="" key={i} t={"edit"} />);
-		} else {
-			let char = input[i].toUpperCase();
-			out.push(<Box letter={char} key={i} t={"edit"} />);
-		}
-	}
-	return <div className="flex flex-row">{out}</div>;
-}*/
-
 function App() {
 	let [curentWord, setCurentWord] = useState(words.at(1));
 
@@ -62,6 +48,19 @@ function App() {
 	}, []);*/
 
 	//setCurentWord(words.at(1));
+
+	function push_rows() {
+		if (!win && input.length === 5) {
+			let r = rows;
+			r.push(input);
+			setRows(r);
+			if (input === curentWord) {
+				console.log("Gagné");
+				setWin(true);
+			}
+			setInput("");
+		}
+	}
 
 	return (
 		<div className="App">
@@ -98,16 +97,7 @@ function App() {
 							onKeyDown={(e) => {
 								console.log(e.key);
 								if (e.key && e.key == "Enter") {
-									if (!win && input.length === 5) {
-										let r = rows;
-										r.push(input);
-										setRows(r);
-										if (input === curentWord) {
-											console.log("Gagné");
-											setWin(true);
-										}
-										setInput("");
-									}
+									push_rows();
 								}
 							}}
 							autofocus
@@ -115,16 +105,7 @@ function App() {
 						<button
 							className="h-16 w-16 rounded border border-slate-600 bg-slate-200 text-black transition-colors hover:bg-slate-400 disabled:bg-slate-300 dark:border-0 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-600"
 							onClick={() => {
-								if (!win && input.length === 5) {
-									let r = rows;
-									r.push(input);
-									setRows(r);
-									if (input === curentWord) {
-										console.log("Gagné");
-										setWin(true);
-									}
-									setInput("");
-								}
+								push_rows();
 							}}
 						>
 							Enter
