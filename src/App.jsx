@@ -81,7 +81,7 @@ function App() {
 							type="text"
 							name="input"
 							id="input"
-							className="col-span-4 h-16 appearance-none rounded border border-slate-600 bg-slate-200 pl-4 text-left text-black transition-colors transition-colors focus:border-blue-600 focus:outline-none dark:border-0 dark:bg-gray-800 dark:text-white"
+							className="col-span-4 h-16 appearance-none rounded border border-slate-600 bg-slate-200 pl-4 text-left text-black transition-colors focus:border-blue-600 focus:outline-none dark:border-0 dark:bg-gray-800 dark:text-white"
 							value={input}
 							disabled={win}
 							onChange={(e) => {
