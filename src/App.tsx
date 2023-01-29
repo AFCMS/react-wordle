@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import Box from "./components/Box";
-import words from "./words.json";
 
-function build_row(curent_word: string, row: string[], id: any) {
+function build_row(curent_word: string | undefined, row: string, id: any) {
 	let out = [];
 
 	if (row === undefined) {
@@ -15,15 +14,17 @@ function build_row(curent_word: string, row: string[], id: any) {
 				out.push(<Box letter=" " key={i} />);
 			} else {
 				let char = row[i].toUpperCase();
-				let char_c = curent_word[i].toUpperCase();
+				let char_c =
+					curent_word === undefined ? "" : curent_word[i].toUpperCase();
 
 				if (char === char_c) {
-					out.push(<Box letter={char} key={i} t={"right"} />);
+					out.push(<Box letter={char} key={i} t="right" />);
 				} else {
-					if (curent_word.match(row[i])) {
-						out.push(<Box letter={char} key={i} t={"wplaced"} />);
+					console.log("CURRENT WORD: ", curent_word);
+					if (curent_word === undefined ? false : curent_word.match(row[i])) {
+						out.push(<Box letter={char} key={i} t="wplaced" />);
 					} else {
-						out.push(<Box letter={char} key={i} t={"wrong"} />);
+						out.push(<Box letter={char} key={i} t="wrong" />);
 					}
 				}
 			}
@@ -33,7 +34,9 @@ function build_row(curent_word: string, row: string[], id: any) {
 }
 
 function App() {
-	let [curentWord, setCurentWord] = useState(words.at(1));
+	let [curentWord, setCurentWord] = useState<string | undefined>(undefined);
+
+	let [newWord, setNewWord] = useState(false);
 
 	let [rows, setRows] = useState<string[]>([]);
 
@@ -49,11 +52,14 @@ function App() {
 		return !win && rows.length === 5;
 	}
 
-	/*useEffect(() => {
-		fetch(process.env.REACT_APP_WORD_API_URL)
-			.then((r) => r.json())
-			.then((r) => setCurentWord(r));
-	}, []);*/
+	useEffect(() => {
+		if (newWord || curentWord === undefined) {
+			fetch(import.meta.env.VITE_WORD_API_URL)
+				.then((r) => r.json() as Promise<string[]>)
+				.then((r) => setCurentWord(r[0]));
+			setNewWord(false);
+		}
+	}, [newWord]);
 
 	//setCurentWord(words.at(1));
 
@@ -73,7 +79,7 @@ function App() {
 		setWin(false);
 		setInput("");
 		setRows([]);
-		setCurentWord(words.at(1));
+		setNewWord(true);
 	}
 
 	return (

@@ -1,9 +1,9 @@
 import "./Box.css";
 
-/**
- * @param {{t: "edit"|"right"|"wrong"|"wplaced", letter: string}} props
- */
-function Box(props) {
+function Box(props: {
+	t?: "edit" | "right" | "wrong" | "wplaced";
+	letter: string;
+}) {
 	let case_type = "";
 
 	switch (props.t) {
@@ -18,6 +18,8 @@ function Box(props) {
 			break;
 		case "wplaced":
 			case_type = "case-y";
+			break;
+		default:
 			break;
 	}
 
