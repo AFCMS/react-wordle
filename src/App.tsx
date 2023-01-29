@@ -20,7 +20,6 @@ function build_row(curent_word: string | undefined, row: string, id: any) {
 				if (char === char_c) {
 					out.push(<Box letter={char} key={i} t="right" />);
 				} else {
-					console.log("CURRENT WORD: ", curent_word);
 					if (curent_word === undefined ? false : curent_word.match(row[i])) {
 						out.push(<Box letter={char} key={i} t="wplaced" />);
 					} else {
