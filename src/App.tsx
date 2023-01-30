@@ -85,11 +85,14 @@ function App() {
 		<div className="App">
 			<div className="flex items-center justify-center p-6">
 				<div className="flex w-max flex-col rounded border border-slate-600 p-4 shadow">
-					<button className="sticky left-10" onClick={reset_game}>
+					<button
+						className="absolute h-10 w-10 rounded border border-slate-600 bg-slate-200 text-black transition-colors hover:bg-slate-400 disabled:bg-slate-300 dark:border-0 dark:bg-gray-800 dark:text-slate-100 dark:hover:bg-gray-600"
+						onClick={reset_game}
+					>
 						New
 					</button>
 					<h1
-						className={`mb-3 text-center text-xl font-bold transition-colors ${(() => {
+						className={`mb-6 mt-2 text-center text-xl font-bold transition-colors ${(() => {
 							if (hasWon()) {
 								return "text-green-600";
 							} else if (hasLost()) {
@@ -126,7 +129,7 @@ function App() {
 								hasWon() || hasLost() ? "Try again?" : "Type a word here..."
 							}
 							value={input}
-							disabled={hasWon() || hasLost()}
+							disabled={hasWon() || hasLost() || newWord}
 							onChange={(e) => {
 								if (
 									e.target.value.length <= 5 &&
